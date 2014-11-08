@@ -31,6 +31,7 @@ done with everything else in an houer or two...
 
   # Now run the example and go to https://localhost:8000
   php -S localhost:8000
+```
 
 # TODOs:
 * Fix TODOs in the code
