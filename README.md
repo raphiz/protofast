@@ -38,4 +38,3 @@ done with everything else in an houer or two...
 * write tests
 * integrate composer -> RELEASE?
 * Add auto builds..
-* Use it for turtleweb with inheritance.
