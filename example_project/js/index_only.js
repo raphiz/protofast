@@ -1,0 +1,3 @@
+function baa(){
+  alert("foo!");
+}
