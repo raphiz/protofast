@@ -23,10 +23,14 @@ done with everything else in an houer or two...
 * Unix based system (I have no clue if it runs on windows...)
 * latest PHP version installed...
 
-# Quick start:
+# Quick start
+```bash
+  mkdir my_project
+  cd my_project
+  bash < <(curl -s https://raw.githubusercontent.com/raphiz/protofast/master/quickstart.sh)
 
-TO BE DONE...
-
+  # Now run the example and go to https://localhost:8000
+  php -S localhost:8000
 
 # TODOs:
 * Fix TODOs in the code
