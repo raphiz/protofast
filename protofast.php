@@ -2,7 +2,7 @@
 /**
 * Protofast - Quickly create a HTML mocks without duplicating code
 *
-* Version: 1.0.0
+* Version: 1.1.0-dev
 *
 * Website: https://github.com/raphiz/protofast
 *
