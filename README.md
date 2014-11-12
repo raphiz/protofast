@@ -1,31 +1,32 @@
 # Introduction
-Protofast is a very easy to use way to quickly create a mockup HTML website site.
-I use this when I'm developing a new HTML layout before I actually implement any
-code. This way, the "customer" can see if all functionality is available
-before the more effort is put into programming.
+Protofast is an easy to use solution to quickly create HTML mockup websites.
 
-So what does Protofast do?
-It provides a very basic "template engine". One base template is defined. Each
-site declares only the specific html. This is better than copy/paste the first
-HTML file and modify it (Because you might change the stylesheet names/ add js
-libraries etc.). Protofast is a quick-and-dirty way to solve this simple issue.
-However, it provides a couple of "goodies" to make this very primitive process
-faster.
+I use this to design a plain HTML layout before I start to write any code. The projects stakeholder can play around with this prototype and give instant feedback concerning the UI. Experiments with new UI-Concepts are cheap this way. When the final draft is accepted from all parties, the actual implementation begins.
 
-The concept is very easy to understand if you checkout the sample project or follow the
-quickstart guide (see below). For the sample project, clone this repository, chdir into the
+But what does Protofast do?
+Protofast provides a very basic "template engine".
+One base template is defined. It declares some variables in which each site can put specific values.
+For example the page title and the main contents.
+This prevents you from copy-paste the first HTML file and modify only some specific parts.
+Additionally, Protofast provides a couple of "goodies" to make the development faster and easier.
+For example, Protofast automatically includes stylesheets and scripts that are called
+similar to the prototype.
+
+The concept is easy to grasp if you take a closer look to the sample project or just follow the
+quickstart guide (see below) and start experimenting. For the sample project, clone this repository, chdir into the
 "example_project" directory and run `php -S localhost:8000` you can see it in action.
+It is highly recommended to take a look in the protofast.php file since not all functionality is  documentated so far.
 
 # Disclaimer
-This is not a framework to use in production! Think before use it with clients,
-it's not allways a good idea to show it to them, cause they then think you're
-done with everything else in an houer or two...
+This is not a framework to use in production! Think before use it with clients.
+It is not always a good idea to show a HTML Mockup because it implies for normal human
+beings that most of the work is already done!
 
 # Requirements
 * PHP <= 5.6 (should also work with older versions)
 
 # Quick start
-On a unix based system, paste the following commands (curl must be installed):
+On a Unix based system, paste the following commands (curl must be installed):
 ```bash
   mkdir my_project
   cd my_project
@@ -35,8 +36,8 @@ On a unix based system, paste the following commands (curl must be installed):
   php -S localhost:8000
 ```
 
-# TODOs:
-* Fix TODOs in the code
-* write tests
-* integrate composer -> RELEASE?
-* Add auto builds..
+# To be done in the future
+* Fix the TODOs left in the `protofast.php`
+* Write unit tests
+* Integrate with composer
+* CI Builds with travis
