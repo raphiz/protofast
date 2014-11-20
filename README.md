@@ -23,14 +23,14 @@ It is not always a good idea to show a HTML Mockup because it implies for normal
 beings that most of the work is already done!
 
 # Requirements
-* PHP <= 5.6 (should also work with older versions)
+* PHP <= 5.6 (might also work with older versions)
 
 # Quick start
 On a Unix based system, paste the following commands (curl must be installed):
 ```bash
   mkdir my_project
   cd my_project
-  bash < <(curl -s https://raw.githubusercontent.com/raphiz/protofast/v1.0.0/quickstart.sh)
+  bash < <(curl -s https://raw.githubusercontent.com/raphiz/protofast/v1.1.0/quickstart.sh)
 
   # Now run the example and go to https://localhost:8000
   php -S localhost:8000
@@ -41,3 +41,10 @@ On a Unix based system, paste the following commands (curl must be installed):
 * Write unit tests
 * Integrate with composer
 * CI Builds with travis
+
+# Changelog
+## v1.1.0
+* Namespace support added
+
+## v1.0.0
+* Initial release
