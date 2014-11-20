@@ -29,6 +29,8 @@
 * THE SOFTWARE.
 */
 
+namespace protofast;
+
 class HTMLPage {
 
   private $configuration = array (
