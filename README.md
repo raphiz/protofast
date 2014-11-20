@@ -38,6 +38,7 @@ On a Unix based system, paste the following commands (curl must be installed):
 
 # To be done in the future
 * Fix the TODOs left in the `protofast.php`
+* The quickstart script fetches it's file from master instead of the latest release tag.
 * Write unit tests
 * Integrate with composer
 * CI Builds with travis
