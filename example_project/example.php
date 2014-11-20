@@ -1,5 +1,6 @@
 <?php
 require_once "../protofast.php";
+use protofast\HTMLPage;
 
 $site = new HTMLPage();
 
