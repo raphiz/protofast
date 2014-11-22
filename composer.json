@@ -1,0 +1,28 @@
+{
+    "name": "raphizim/protofast",
+    "description": "Quickly create a HTML mocks without duplicating code",
+    "keywords": [
+        "html",
+        "mockup",
+        "prototype",
+        "test",
+        "css",
+        "js"
+    ],
+    "homepage": "https://github.com/raphiz/protofast",
+    "version": "1.1.0-dev",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Raphael Zimmermann",
+            "homepage": "http://raphael.li"
+        }
+    ],
+     "require-dev": {
+        "phpunit/phpunit": "4.3.*"
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit"
+    }
+}
