@@ -1,4 +1,10 @@
-# Introduction
+# Protofast
+[![Build Status](https://travis-ci.org/raphiz/protofast.svg?branch=master)](https://travis-ci.org/raphiz/protofast)
+[![Dependency Status](https://www.versioneye.com/user/projects/5470c2c8810106a6cc00058d/badge.svg?style=flat)](https://www.versioneye.com/user/projects/5470c2c8810106a6cc00058d)
+[![Latest Stable Version](https://poser.pugx.org/aydin-hassan/magento-core-mapper/version.png)](https://packagist.org/packages/aydin-hassan/magento-core-mapper)
+[![Latest Untable Version](https://poser.pugx.org/aydin-hassan/magento-core-mapper/v/unstable.png)](https://packagist.org/packages/aydin-hassan/magento-core-mapper)
+
+## Introduction
 Protofast is an easy to use solution to quickly create HTML mockup websites.
 
 I use this to design a plain HTML layout before I start to write any code. The projects stakeholder can play around with this prototype and give instant feedback concerning the UI. Experiments with new UI-Concepts are cheap this way. When the final draft is accepted from all parties, the actual implementation begins.
@@ -17,15 +23,15 @@ quickstart guide (see below) and start experimenting. For the sample project, cl
 "example_project" directory and run `php -S localhost:8000` you can see it in action.
 It is highly recommended to take a look in the protofast.php file since not all functionality is  documentated so far.
 
-# Disclaimer
+## Disclaimer
 This is not a framework to use in production! Think before use it with clients.
 It is not always a good idea to show a HTML Mockup because it implies for normal human
 beings that most of the work is already done!
 
-# Requirements
+## Requirements
 * PHP <= 5.6 (might also work with older versions)
 
-# Quick start
+## Quick start
 On a Unix based system, paste the following commands (curl must be installed):
 ```bash
   mkdir my_project
@@ -36,16 +42,9 @@ On a Unix based system, paste the following commands (curl must be installed):
   php -S localhost:8000
 ```
 
-# To be done in the future
+## To be done in the future
 * Fix the TODOs left in the `protofast.php`
-* The quickstart script fetches it's file from master instead of the latest release tag.
+* The quickstart script fetches it's file from master instead of the latest release tag.t
 * Write unit tests
 * Integrate with composer
 * CI Builds with travis
-
-# Changelog
-## v1.1.0
-* Namespace support added
-
-## v1.0.0
-* Initial release
