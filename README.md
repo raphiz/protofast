@@ -27,9 +27,6 @@ This is not a framework to use in production! Think before use it with clients.
 It is not always a good idea to show a HTML Mockup because it implies for normal human
 beings that most of the work is already done!
 
-## Requirements
-* PHP <= 5.3 (might also work with older versions)
-
 ## Quick start
 On a Unix based system, paste the following commands (curl must be installed):
 ```bash
@@ -44,6 +41,5 @@ On a Unix based system, paste the following commands (curl must be installed):
 ## To be done in the future
 * Fix the TODOs left in the `protofast.php`
 * The quickstart script fetches it's file from master instead of the latest release tag.t
+* Fix the quickstart script completly
 * Write unit tests
-* Integrate with composer
-* CI Builds with travis
