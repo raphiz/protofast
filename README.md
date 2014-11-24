@@ -1,8 +1,7 @@
 # Protofast
 [![Build Status](https://travis-ci.org/raphiz/protofast.svg?branch=master)](https://travis-ci.org/raphiz/protofast)
 [![Dependency Status](https://www.versioneye.com/user/projects/5470c2c8810106a6cc00058d/badge.svg?style=flat)](https://www.versioneye.com/user/projects/5470c2c8810106a6cc00058d)
-[![Latest Stable Version](https://poser.pugx.org/aydin-hassan/magento-core-mapper/version.png)](https://packagist.org/packages/aydin-hassan/magento-core-mapper)
-[![Latest Untable Version](https://poser.pugx.org/aydin-hassan/magento-core-mapper/v/unstable.png)](https://packagist.org/packages/aydin-hassan/magento-core-mapper)
+[![Latest Stable Version](https://poser.pugx.org/raphizim/protofast/version.svg)](https://packagist.org/packages/raphizim/protofast)
 
 ## Introduction
 Protofast is an easy to use solution to quickly create HTML mockup websites.
@@ -29,7 +28,7 @@ It is not always a good idea to show a HTML Mockup because it implies for normal
 beings that most of the work is already done!
 
 ## Requirements
-* PHP <= 5.6 (might also work with older versions)
+* PHP <= 5.3 (might also work with older versions)
 
 ## Quick start
 On a Unix based system, paste the following commands (curl must be installed):
