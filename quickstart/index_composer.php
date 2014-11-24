@@ -1,5 +1,5 @@
 <?php
-require_once "protofast/HTMLPage.php";
+require_once "./vendor/autoload.php";
 use protofast\HTMLPage;
 
 $site = new HTMLPage();

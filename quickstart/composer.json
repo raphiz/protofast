@@ -1,0 +1,5 @@
+{
+  "require": {
+    "raphizim/protofast": "*"
+  }
+}
