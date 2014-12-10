@@ -24,9 +24,12 @@
         }
     ],
      "require-dev": {
-        "phpunit/phpunit": "4.3.*"
+        "phpunit/phpunit": "4.3.*",
+        "phpunit/phpunit": "4.3.*",
+        "phpdocumentor/phpdocumentor": "2.7.1"
     },
     "scripts": {
-        "test": "vendor/bin/phpunit"
+        "test": "vendor/bin/phpunit",
+        "doc" : "vendor/bin/phpdoc -d lib/ -t doc/api/"
     }
 }

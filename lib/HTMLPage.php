@@ -1,172 +1,112 @@
 <?php
 /**
-* Protofast - Quickly create a HTML mocks without duplicating code
-*
-* Version: 1.1.0-dev
-*
-* Website: https://github.com/raphiz/protofast
-*
-* License: MIT (http://opensource.org/licenses/MIT)
-*
-* Copyright (c) 2014 Raphael Zimmermann
-*
-* Permission is hereby granted, free of charge, to any person obtaining a copy
-* of this software and associated documentation files (the "Software"), to deal
-* in the Software without restriction, including without limitation the rights
-* to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-* copies of the Software, and to permit persons to whom the Software is
-* furnished to do so, subject to the following conditions:
-*
-* The above copyright notice and this permission notice shall be included in
-* all copies or substantial portions of the Software.
-*
-* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-* OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-* THE SOFTWARE.
+* The focus of this file is completely on the HTMLPage class.
 */
-
 namespace protofast;
 
-class HTMLPage {
 
-  private $configuration = array (
-    "stylesheet_direcotry"  => "css",
-    "script_direcotry"  => "js",
-    "include_by_convention" => true,
-    "variable_before" => "{{",
-    "variable_after" => "}}",
-    "base_template_name" => "base.html",
-    "template_extension" => ".html",
-    "template_directory" => "templates"
-  );
+/**
+ * A HTMLPage is an extension for Page with some
+ * useful predefined getters and setters for a nicer syntax, for
+ * example setTitle.
+ */
+class HTMLPage extends Page {
+  /**
+   * A list of Additional stylesheets.
+   */
+  public $additional_stylesheets = array();
 
-  // The directory in which the HTML templates are located.
-  private $template_dir = NULL;
+  /**
+   * A list of Additional script.
+   */
+  public $additional_scripts = array();
 
-  // The name of the template to
-  private $template_name = NULL;
-
-  // A key/value array of variables to replace.  The key is the variable
-  // to replace and the value the actual replacement value.
-  private $replace_token = array();
-
-  // A list of Additional stylesheets
-  private $additional_stylesheets = array();
-
-  // A list of Additional script
-  private $additional_scripts = array();
-
-
-  // Constructor
-  // Takes one optional parameter: the template name
-  function __construct() {
-    // Read the protofast configuration
-    $config_file = dirname($_SERVER["SCRIPT_FILENAME"]) . "/protofast.ini";
-    if(file_exists($config_file)) {
-      $user_configuration = parse_ini_file($config_file);
-      $this->configuration = array_merge($this->configuration, $user_configuration);
-    }
-    // Evaluate the direcory, in which the templates are located.
-    // This is the "templates" direcory relative from the actually called script.
-    $this->template_dir = dirname($_SERVER["SCRIPT_FILENAME"]) . "/" . $this->configuration['template_directory']. "/";
-
-    if (func_num_args() == 1) {
-      // Set the template name if it is given as the first argument of the constructor.
-      $this->template_name = func_get_arg(0);
-    } else {
-      // Get the name of the actually called script (withoth the ".php" suffic) and use this one as
-      // template name.
-      $this->template_name = basename($_SERVER["SCRIPT_FILENAME"], ".php");
-    }
-
-  }
-
-  // Sets the replacement for the PAGE_TITLE variable.
-  function setTitle($title) {
+  /**
+   * Sets the replacement for the PAGE_TITLE variable.
+   *
+   * @param string $title the title of the page to set.
+   */
+  public function setTitle($title) {
     $this->replace('PAGE_TITLE', $title);
   }
 
-  // Adds the given path in the stylesheet section.
-  function addStylesheet($path) {
+  /**
+   * Adds the given path in the stylesheet section.
+   *
+   * @param string $path relative or absolute path pointing to the
+   *                      stylesheet.
+   */
+   public function addStylesheet($path) {
     array_push($this->additional_stylesheets, $path);
   }
 
-  // Adds the given script in the script section.
-  function addScript($path) {
+  /**
+   * Adds the given path in the scripts section.
+   *
+   * @param string $path relative or absolute path pointing to the
+   *                      script.
+   */
+   public function addScript($path) {
     array_push($this->additional_scripts, $path);
   }
 
-  // replace the given variable with the given replacement.
-  function replace($variable, $replacement){
-    $this->replace_token[$variable] = $replacement;
+  /**
+   * {@inheritDoc}
+   */
+  public function get_replace_tokens(){
+      $tokens = parent::get_replace_tokens();
+      $stylesheets = _generate_additional_resource('<link rel="stylesheet" type="text/css" href="%s">',
+                                    $this->additional_stylesheets,
+                                    $this->configuration->stylesheet_direcotry,
+                                    "css"
+      );
+
+      $scripts =  _generate_additional_resource('<script src="%s"></script>',
+                                    $this->additional_scripts,
+                                    $this->configuration->script_direcotry,
+                                    "js"
+      );
+
+      $tokens['ADDITIONAL_STYLESHEETS'] = $stylesheets;
+      $tokens['ADDITIONAL_SCRIPTS'] = $scripts;
+
+     return $tokens;
   }
 
-
-  function render(){
-    // Clone the $this->replace_token into a local variable
-    // in order to be reproducable
-    $replacements = $this->replace_token;
-
-    // Add stylesheet and script replacement variables to the replacements
-    $replacements['ADDITIONAL_STYLESHEETS'] = $this->generate_additional_stylesheet_html();
-    $replacements['ADDITIONAL_SCRIPTS'] = $this->generate_additional_scripts_html();
-
-    // read the base and the specific template from the template directory
-    $base_template = file_get_contents($this->template_dir . $this->configuration['base_template_name']);
-    $content_template = file_get_contents($this->template_dir . $this->template_name . $this->configuration['template_extension']);
-
-    // Replace the content variable in the base template with the specific template
-    $base_template = $this->do_replace($base_template, "CONTENT", $content_template);
-
-    // Replace all other variables
-    foreach ($replacements as $variable => $value) {
-      $base_template = $this->do_replace($base_template, $variable, $value);
-    }
-
-    // Print it out!
-    echo $base_template;
-  }
-
-  function do_replace($template, $variable, $replacement) {
-    $full_variable_name = $this->configuration['variable_before'] . $variable . $this->configuration['variable_after'];
-    return str_replace($full_variable_name, $replacement, $template);
-  }
-
-  function generate_additional_stylesheet_html(){
-    // If a stylesheet with the same name exists, include it.
-    if ($this->configuration['include_by_convention']){
-      // TODO: eventually allow less/sass values here...
-      $path = $this->configuration['stylesheet_direcotry'] . "/" . basename($_SERVER["SCRIPT_FILENAME"], ".php") . ".css";
-      if(file_exists($path) && in_array($path, $this->additional_stylesheets) == false){
-        array_push($this->additional_stylesheets, $path);
-      }
-    }
-
-    $html = "";
-    foreach ($this->additional_stylesheets as $path){
-      $html .= '<link rel="stylesheet" type="text/css" href="' . $path . '">';
-    }
-    return $html;
-  }
-
-  function generate_additional_scripts_html(){
+  /**
+   * A simple utility method to generate a string which includes additional resources (js/css) into a page.
+   *
+   * This utility method generates a HTML string that loads the given list of addtional resources. It might also include
+   * files by convention. A file is included by convention if it exists in the given $convention_directory and ends with the
+   * given $convention_extension (eg. a *.js file in the js/ directory).
+   *
+   * An example usage would be:
+   *     _generate_additional_resource('<script src="%s"></script>',array('1.js', '2.js'), 'scripts/', 'js');
+   *
+   * @param string $pattern the pattern which is used for each resourc
+   * @param array $additional_list the list of additional resources
+   * @param string $convention_directory the directory to look for conventional matches in.
+   * @param string $convention_extension the file extension to look for conventional matches.
+   */
+  private function _generate_additional_resource($pattern, $additional_list, $convention_directory, $convention_extension){
     // If a script with the same name exists, include it.
-    if ($this->configuration['include_by_convention']){
-      // TODO: eventually allow dart etc. values here...
-      $path = $this->configuration['script_direcotry'] . "/" . basename($_SERVER["SCRIPT_FILENAME"], ".php") . ".js";
-      if(file_exists($path) && in_array($path, $this->additional_scripts) == false){
-        array_push($this->additional_scripts, $path);
+    if ($this->configuration->include_by_convention) {
+      $path = sprintf("%s/%s.%s",
+                      $convention_directory,
+                      basename($_SERVER["SCRIPT_FILENAME"], ".php"),
+                      $convention_extension
+      );
+
+      if(file_exists($path) && !in_array($path, $additional_list)){
+        array_push($additional_list, $path);
       }
     }
 
     $html = "";
-    foreach ($this->additional_scripts as $path){
-      $html .= '<script src="' . $path . '"></script>';
+    foreach ($additional_list as $path){
+      $html .= sprintf($pattern, $path);
     }
+
     return $html;
   }
 
