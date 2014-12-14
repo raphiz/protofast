@@ -1,3 +1,3 @@
 function foo(){
-  alert("baa");
+  window.alert("baa");
 }
