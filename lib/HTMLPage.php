@@ -55,13 +55,13 @@ class HTMLPage extends Page {
    */
   public function get_replace_tokens(){
       $tokens = parent::get_replace_tokens();
-      $stylesheets = _generate_additional_resource('<link rel="stylesheet" type="text/css" href="%s">',
+      $stylesheets = $this->_generate_additional_resource('<link rel="stylesheet" type="text/css" href="%s">',
                                     $this->additional_stylesheets,
                                     $this->configuration->stylesheet_direcotry,
                                     "css"
       );
 
-      $scripts =  _generate_additional_resource('<script src="%s"></script>',
+      $scripts =  $this->_generate_additional_resource('<script src="%s"></script>',
                                     $this->additional_scripts,
                                     $this->configuration->script_direcotry,
                                     "js"
