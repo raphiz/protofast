@@ -29,7 +29,7 @@ class RenderEngine {
     preg_match_all($pattern, $template, $result);
 
     // Get all variable values
-    $tokens = $page->get_replace_tokens();
+    $tokens = $page->getReplaceTokens();
 
     for ($i = 0; $i < count($result[0]); $i++) {
       $full_variable_name = $result[0][$i];

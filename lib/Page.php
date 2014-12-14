@@ -47,7 +47,7 @@ class Page {
    * Replace the given variable with the given replacement.
    *
    * This will then later made available to the renderer
-   * using the {@link protofast\Page::get_replace_tokens()} method.
+   * using the {@link protofast\Page::getReplaceTokens()} method.
    *
    * @param string    $variable the name of the variable to replace _without any
    * brackets_ (eg. ``myvar``, not ``{{myvar}}``).
@@ -72,7 +72,7 @@ class Page {
    * @return array an array with the variable name as key and it's replacement value as
    * string value.
    */
-  public function get_replace_tokens(){
+  public function getReplaceTokens(){
     return $this->replace_token;
   }
 
