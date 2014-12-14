@@ -2,9 +2,13 @@
 [![Build Status](https://travis-ci.org/raphiz/protofast.svg?branch=master)](https://travis-ci.org/raphiz/protofast)
 [![Dependency Status](https://www.versioneye.com/user/projects/5470c2c8810106a6cc00058d/badge.svg?style=flat)](https://www.versioneye.com/user/projects/5470c2c8810106a6cc00058d)
 [![Latest Stable Version](https://poser.pugx.org/raphizim/protofast/version.svg)](https://packagist.org/packages/raphizim/protofast)
-
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/raphiz/protofast/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/raphiz/protofast/?branch=master)
+[![Code Climate](https://codeclimate.com/github/raphiz/protofast/badges/gpa.svg)](https://codeclimate.com/github/raphiz/protofast)
+[![Test Coverage](https://codeclimate.com/github/raphiz/protofast/badges/coverage.svg)](https://codeclimate.com/github/raphiz/protofast)
 ## Introduction
 Protofast is an easy to use solution to quickly create HTML mockup websites.
+
+Protofast works with PHP >= 5.3 and hhvm.
 
 I use this to design a plain HTML layout before I start to write any code. The projects stakeholder can play around with this prototype and give instant feedback concerning the UI. Experiments with new UI-Concepts are cheap this way. When the final draft is accepted from all parties, the actual implementation begins.
 
@@ -37,9 +41,3 @@ On a Unix based system, paste the following commands (curl must be installed):
   # Now run the example and go to https://localhost:8000
   php -S localhost:8000
 ```
-
-## To be done in the future
-* Fix the TODOs left in the `protofast.php`
-* The quickstart script fetches it's file from master instead of the latest release tag.t
-* Fix the quickstart script completly
-* Write unit tests
