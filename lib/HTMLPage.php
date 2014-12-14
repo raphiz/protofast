@@ -111,4 +111,3 @@ class HTMLPage extends Page {
   }
 
 }
-?>
