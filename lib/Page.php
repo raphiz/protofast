@@ -41,7 +41,7 @@ class Page
         //  Load the configuration
         $config_file = dirname($_SERVER["SCRIPT_FILENAME"]) . "/protofast.ini";
         $this->configuration = new PageConfiguration($config_file);
-        $this->renderer = new RenderEngine($this);
+        $this->renderer = new RenderEngine();
 
         // Get the name of the actually called script (withoth the ".php" suffic)
         // and use this one as template name.
