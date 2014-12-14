@@ -21,23 +21,12 @@ class RenderEngine
     public function render($page)
     {
         $template = $this->readTemplate($page);
-
-        // Evaluate the regexp to search for variables in the template string.
-        $pattern = sprintf(
-            "(%s([a-zA-Z_-]*)%s)",
-            $page->configuration->variable_before,
-            $page->configuration->variable_after
-        );
-
-        // Find all variables in the template string
-        preg_match_all($pattern, $template, $result);
-
-        // Get all variable values
+        $declarations = $this->findAllDeclarations($page->configuration, $template);
         $tokens = $page->getReplaceTokens();
 
-        for ($i = 0; $i < count($result[0]); $i++) {
-            $full_variable_name = $result[0][$i];
-            $name = $result[1][$i];
+        for ($i = 0; $i < count($declarations[0]); $i++) {
+            $full_variable_name = $declarations[0][$i];
+            $name = $declarations[1][$i];
 
             if (array_key_exists($name, $tokens)) {
               // Replace the variable with it's value if it's declared
@@ -48,8 +37,34 @@ class RenderEngine
             }
         }
 
-      // Return the processed string.
+         // Return the processed string.
          return $template;
+    }
+
+    /**
+     * Finds all variable declarations in the given template string and returns them
+     * in an array,
+     *
+     * @param \protofast\PageConfiguration $configuration The configuration of the page to render.
+     * @param string $template the full template string to render
+     *
+     * @return An array that contains all matches as well as two groups (see preg_match_all):
+     * The first group is the full variable name with the start/end markers (eg. {{myvar}}))
+     * whereas the second group only consists of the variable name, (eg. myvar).
+     */
+    private function findAllDeclarations($configuration, $template)
+    {
+        // Evaluate the regexp to search for variables in the template string.
+        $pattern = sprintf(
+            "(%s([a-zA-Z_-]*)%s)",
+            $configuration->variable_before,
+            $configuration->variable_after
+        );
+
+        // Find all variables in the template string
+        preg_match_all($pattern, $template, $result);
+
+        return $result;
     }
 
     /**
