@@ -58,7 +58,7 @@ class RenderEngine
      * Returns the template of the given page as string. The template is loaded
      * from the file system - relative from the called script file.
      *
-     * @param protofast\Page $page the page to get the template for.
+     * @param \protofast\Page $page the page to get the template for.
      */
     private function readTemplate($page)
     {

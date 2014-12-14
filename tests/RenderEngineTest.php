@@ -31,6 +31,7 @@ class RenderEngineTest extends \PHPUnit_Framework_TestCase
         $_SERVER["SCRIPT_FILENAME"] = getcwd() . "/tests/data/example.php";
 
         $page = new HTMLPage();
+        
         $page->replace('name', "Peter");
 
         $renderer = new RenderEngine($page);

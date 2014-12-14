@@ -11,6 +11,16 @@ class Page
 {
 
     /**
+    * The loaded configuration.
+    */
+    protected $configuration = null;
+
+    /**
+    * The renderer to use.
+    */
+    protected $renderer = null;
+
+    /**
     * The name of the template to
     */
     public $template_name = null;

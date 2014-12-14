@@ -14,6 +14,11 @@ class PageConfiguration
 {
 
     /**
+     * The loaded configuration.
+     */
+    private $configurations = null;
+
+    /**
      * These are the preset configuration values of protofast.
      */
     private $defaults = array (
