@@ -14,12 +14,12 @@ class HTMLPage extends Page {
   /**
    * A list of Additional stylesheets.
    */
-  public $additional_stylesheets = array();
+  public $stylesheets = array();
 
   /**
    * A list of Additional script.
    */
-  public $additional_scripts = array();
+  public $scripts = array();
 
   /**
    * Sets the replacement for the PAGE_TITLE variable.
@@ -37,7 +37,7 @@ class HTMLPage extends Page {
    *                      stylesheet.
    */
    public function addStylesheet($path) {
-    array_push($this->additional_stylesheets, $path);
+    array_push($this->stylesheets, $path);
   }
 
   /**
@@ -47,7 +47,7 @@ class HTMLPage extends Page {
    *                      script.
    */
    public function addScript($path) {
-    array_push($this->additional_scripts, $path);
+    array_push($this->scripts, $path);
   }
 
   /**
@@ -55,20 +55,20 @@ class HTMLPage extends Page {
    */
   public function get_replace_tokens(){
       $tokens = parent::get_replace_tokens();
-      $stylesheets = $this->_generate_additional_resource('<link rel="stylesheet" type="text/css" href="%s">',
-                                    $this->additional_stylesheets,
+      $stylesheets = $this->_generate_resource('<link rel="stylesheet" type="text/css" href="%s">',
+                                    $this->stylesheets,
                                     $this->configuration->stylesheet_direcotry,
                                     "css"
       );
 
-      $scripts =  $this->_generate_additional_resource('<script src="%s"></script>',
-                                    $this->additional_scripts,
+      $scripts =  $this->_generate_resource('<script src="%s"></script>',
+                                    $this->scripts,
                                     $this->configuration->script_direcotry,
                                     "js"
       );
 
-      $tokens['ADDITIONAL_STYLESHEETS'] = $stylesheets;
-      $tokens['ADDITIONAL_SCRIPTS'] = $scripts;
+      $tokens['STYLESHEETS'] = $stylesheets;
+      $tokens['SCRIPTS'] = $scripts;
 
      return $tokens;
   }
@@ -81,14 +81,14 @@ class HTMLPage extends Page {
    * given $convention_extension (eg. a *.js file in the js/ directory).
    *
    * An example usage would be:
-   *     _generate_additional_resource('<script src="%s"></script>',array('1.js', '2.js'), 'scripts/', 'js');
+   *     _generate_resource('<script src="%s"></script>',array('1.js', '2.js'), 'scripts/', 'js');
    *
    * @param string $pattern the pattern which is used for each resourc
-   * @param array $additional_list the list of additional resources
+   * @param array $list the list of additional resources
    * @param string $convention_directory the directory to look for conventional matches in.
    * @param string $convention_extension the file extension to look for conventional matches.
    */
-  private function _generate_additional_resource($pattern, $additional_list, $convention_directory, $convention_extension){
+  private function _generate_resource($pattern, $list, $convention_directory, $convention_extension){
     // If a script with the same name exists, include it.
     if ($this->configuration->include_by_convention) {
       $path = sprintf("%s/%s.%s",
@@ -97,13 +97,13 @@ class HTMLPage extends Page {
                       $convention_extension
       );
 
-      if(file_exists($path) && !in_array($path, $additional_list)){
-        array_push($additional_list, $path);
+      if(file_exists($path) && !in_array($path, $list)){
+        array_push($list, $path);
       }
     }
 
     $html = "";
-    foreach ($additional_list as $path){
+    foreach ($list as $path){
       $html .= sprintf($pattern, $path);
     }
 
