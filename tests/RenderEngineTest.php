@@ -6,18 +6,35 @@ class RenderEngineTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
-     * Tests if not declared variables disappear.
+     * The render engine to work with, defined in the setup method.
      */
-    public function testUnsetVariablesDisappear()
+    protected $engine = null;
+
+    /**
+     * The example page to render, defined in the setup method.
+     */
+    protected $page = null;
+
+    /**
+     * Prepares an example page and engine to prevent code duplication.
+     */
+    public function setUp()
     {
         // Fake SCRIPT_FILENAME for test purposes...
         $_SERVER["SCRIPT_FILENAME"] = getcwd() . "/tests/data/example.php";
 
-        $page = new HTMLPage();
+        $this->page = new HTMLPage();
 
-        $renderer = new RenderEngine($page);
+        $this->engine = new RenderEngine();
+    }
 
-        $result = $renderer->render($page);
+    /**
+     * Tests if not declared variables disappear.
+     */
+    public function testUnsetVariablesDisappear()
+    {
+
+        $result = $this->engine->render($this->page);
 
         $this->assertEquals("Hello \n", $result);
     }
@@ -27,16 +44,9 @@ class RenderEngineTest extends \PHPUnit_Framework_TestCase
      */
     public function testBasicReplacement()
     {
-        // Fake SCRIPT_FILENAME for test purposes...
-        $_SERVER["SCRIPT_FILENAME"] = getcwd() . "/tests/data/example.php";
+        $this->page->replace('name', "Peter");
 
-        $page = new HTMLPage();
-        
-        $page->replace('name', "Peter");
-
-        $renderer = new RenderEngine($page);
-
-        $result = $renderer->render($page);
+        $result = $this->engine->render($this->page);
 
         $this->assertEquals("Hello Peter\n", $result);
 
