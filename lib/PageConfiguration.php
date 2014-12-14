@@ -9,6 +9,21 @@ namespace protofast;
  * The PageConfiguration class allows to simply configure protofast.
  * It loads user specific configuration values and makes them easily accessible
  * as attributes (eg. $configuration->property)
+ *
+ * @property string stylesheet_direcotry The directory that contains the stylesheets.
+ * This is mainly used for loading by convention.
+ * @property string script_direcotry The directory that contains the scripts.
+ * This is mainly used for loading by convention.
+ * @property boolean include_by_convention if set to true, the HTMLPage will automatically
+ * include stylesheets/scripts with the same name as the script from the coresponding directories.
+ * @property string variable_before Declars how a variable is introduced in the template.
+ * @property string variable_after Declars how a variable declaration ends in the template.
+ * @property string base_template_name the name of the base template to use as root for all templates.
+ * @property string template_extension the extension of all template names.
+ * @property string template_directory the directory rellative to the called scipt to look for templates
+ * (without trailing slashes)
+ * @property string unset_variables_disappear if set to true, all unset variables will be removed from the
+ * template when it is rendered.
  */
 class PageConfiguration
 {
