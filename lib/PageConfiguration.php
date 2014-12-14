@@ -53,11 +53,11 @@ class PageConfiguration {
       return $this->defaults;
     }
 
-    // Parse the specific configuration
-    $specific_configuration = parse_ini_file($configuration_file);
+    // Parse the user configuration
+    $user_configuration = parse_ini_file($configuration_file);
 
-    // Merge specific configrations with the defaults
-    return array_merge($this->defaults, $specific_configuration);
+    // Merge user configrations with the defaults
+    return array_merge($this->defaults, $user_configuration);
   }
 
   /**
