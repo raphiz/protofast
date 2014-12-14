@@ -1,3 +1,5 @@
+/* global console */
 function baa(){
-  alert("foo!");
+  console.log("foo!");
 }
+baa();

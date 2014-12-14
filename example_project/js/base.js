@@ -1,3 +1,6 @@
+/* global console */
 function foo(){
-  window.alert("baa");
+  console.log("baa");
 }
+
+foo();
