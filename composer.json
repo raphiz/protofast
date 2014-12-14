@@ -24,9 +24,9 @@
         }
     ],
      "require-dev": {
-        "phpunit/phpunit": "4.3.*",
-        "phpunit/phpunit": "4.3.*",
-        "phpdocumentor/phpdocumentor": "2.7.1"
+        "phpunit/phpunit": "4.4.*",
+        "phpdocumentor/phpdocumentor": "2.*",
+        "codeclimate/php-test-reporter": "dev-master"
     },
     "scripts": {
         "test": "vendor/bin/phpunit",
