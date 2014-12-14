@@ -13,7 +13,7 @@ class Page
     /**
     * The loaded configuration.
     */
-    protected $configuration = null;
+    public $configuration = null;
 
     /**
     * The renderer to use.
