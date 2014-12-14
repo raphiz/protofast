@@ -12,5 +12,3 @@ $site->replace("PAGE_DESCRIPTION", "This is an Example site");
 // for equally called files in the stylesheets/js directory
 
 $site->render();
-
-?>

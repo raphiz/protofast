@@ -35,4 +35,3 @@ class ProtofastTest extends \PHPUnit_Framework_TestCase {
   }
 
 }
-?>

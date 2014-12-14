@@ -5,5 +5,3 @@ use protofast\HTMLPage;
 $site = new HTMLPage();
 $site->setTitle("Home");
 $site->render();
-
-?>

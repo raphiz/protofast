@@ -12,5 +12,3 @@ $site->addScript("stylesheets/index_only.js");
 $site->replace("PAGE_DESCRIPTION", "This is the index of the page");
 
 $site->render();
-
-?>
